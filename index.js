@@ -22,6 +22,10 @@ app.get("/api/articles/:name", async (req, res) => {
     }
 })
 
+app.get("", (req, res)=>{
+    res.send("Page works fine!😋")
+})
+
 
 app.post("/api/articles/:name/add-comments", async (req, res) => {
     try {
