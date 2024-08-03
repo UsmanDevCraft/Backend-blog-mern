@@ -43,6 +43,21 @@ app.post("/api/articles/:name/add-comments", async (req, res) => {
     }
 });
 
+app.delete("/api/articles/deletecomment/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        let comment = await Comment.findById(id);
+        if(!comment){
+            return res.status(404).json({"error": "Comment doesnot existor already deleted!"})
+        }
+        comment = await Comment.findByIdAndDelete(id);
+        res.send({comment, error: "Comment deleted successfully"});
+
+    } catch (error) {
+        res.status(400).send({error: error.message});
+    }
+})
+
 
 app.listen(port, ()=>{
     console.log(`Backend is running fine 🥰 on port localhost:${port}`)
